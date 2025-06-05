@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scheduling a Medical Appointment</title>
+  <style>
+    :root {
+      --primary-color: #20639b;
+      --background-color: #f0f4f8;
+      --text-color: #22303c;
+      --input-bg: #ffffff;
+      --border-color: #ced7df;
+      --border-radius: 8px;
+      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --button-hover: #1a4e76;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: var(--font-family);
+      background-color: var(--background-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+    .container {
+      background: var(--input-bg);
+      max-width: 420px;
+      width: 100%;
+      padding: 2rem 2.5rem;
+      border-radius: var(--border-radius);
+      box-shadow: 0 7px 21px rgba(32, 99, 155, 0.15);
+      display: flex;
+      flex-direction: column;
+    }
+    h1 {
+      margin: 0 0 1.5rem;
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-align: center;
+      color: var(--primary-color);
+    }
+    label {
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      display: block;
+      font-size: 0.9rem;
+    }
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.55rem 0.9rem;
+      font-size: 1rem;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--border-radius);
+      background: var(--input-bg);
+      color: var(--text-color);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      font-family: var(--font-family);
+      resize: vertical;
+    }
+    input[type="text"]:focus,
+    input[type="date"]:focus,
+    input[type="time"]:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 7px var(--primary-color);
+      outline: none;
+    }
+    textarea {
+      min-height: 90px;
+      margin-bottom: 1.2rem;
+    }
+    button {
+      margin-top: 1.6rem;
+      background-color: var(--primary-color);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--border-radius);
+      padding: 0.85rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    button:hover,
+    button:focus {
+      background-color: var(--button-hover);
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <main class="container" role="main" aria-label="Agendamento de Consulta Médica">
+    <h1>Schedule Consultation</h1>
+    <form id="agendamentoForm" novalidate>
+      <label for="patientName">Patient Name</label>
+      <input type="text" id="patientName" name="patientName" placeholder="Digite o nome" required />
+
+      <label for="doctorSelect">Selecione o Médico</label>
+      <select id="doctorSelect" name="doctor" required>
+        <option value="" disabled selected>Choose a doctor</option>
+        <option value="Dr. Ana Silva">Dr. Ana Silva</option>
+        <option value="Dr. Bruno Costa">Dr. Bruno Costa</option>
+        <option value="Dra. Carla Almeida">Dra. Carla Almeida</option>
+        <option value="Dr. Daniel Souza">Dr. Daniel Souza</option>
+        <option value="Dra. Elisa Martins">Dra. Elisa Martins</option>
+      </select>
+
+      <label for="date">Date</label>
+      <input type="date" id="date" name="date" required />
+
+      <label for="time">Time</label>
+      <input type="time" id="time" name="time" required />
+
+      <label for="diseaseExplain">Explain the Disease or Condition</label>
+      <textarea id="diseaseExplain" name="diseaseExplain" placeholder="Descreva sua condição" required></textarea>
+
+      <button type="submit">To schedule</button>
+    </form>
+  </main>
+
+  <script>
+    const form = document.getElementById('agendamentoForm');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      if(!form.checkValidity()) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+
+      const data = {
+        patientName: form.patientName.value.trim(),
+        doctor: form.doctor.value,
+        date: form.date.value,
+        time: form.time.value,
+        diseaseExplain: form.diseaseExplain.value.trim()
+      };
+
+      alert(
+        'Appointment scheduled successfully!\n\n' 
+      );
+      window.location.href = "inicial.html";
+
+      form.reset();
+      form.patientName.focus();
+    });
+  </script>
+</body>
+</html>
